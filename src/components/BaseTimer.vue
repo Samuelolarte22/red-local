@@ -1,77 +1,6 @@
 <template>
-  <v-app id="inspire">
-    <v-app-bar
-      app
-      color="white"
-      flat
-    >
-      <v-avatar
-        :color="$vuetify.breakpoint.smAndDown ? 'grey darken-1' : 'transparent'"
-        size="32"
-      ></v-avatar>
-
-      <v-tabs
-        centered
-        class="ml-n9"
-        color="grey darken-1"
-      >
-        <v-tab
-          v-for="link in links"
-          :key="link"
-        >
-          {{ link }}
-        </v-tab>
-      </v-tabs>
-
-      <v-avatar
-        class="hidden-sm-and-down"
-        color="grey darken-1 shrink"
-        size="32"
-      ></v-avatar>
-    </v-app-bar>
-
-    <v-main class="grey lighten-3">
-      <v-container>
-        <v-row>
-          <v-col
-            cols="12"
-            sm="2"
-          >
-            <v-sheet
-              rounded="lg"
-              min-height="268"
-            >
-              <!-- CONTENIDO -->
-              Contenido de la evaluación
-            </v-sheet>
-          </v-col>
-
-          <v-col
-            cols="12"
-            sm="8"
-          >
-            <v-sheet
-              min-height="70vh"
-              rounded="lg"
-            >
-              <!--  -->
-              Pregunta actual de la evaluación
-              
-              <BaseTimer/>
-            </v-sheet>
-          </v-col>
-
-          <v-col
-            cols="12"
-            sm="2"
-          >
-            <v-sheet
-              rounded="lg"
-              min-height="268"
-            >
-              <!--  -->
-              <BaseTimer/>
-              <div class="base-timer">
+    <div class="content">
+    <div class="base-timer">
       <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
         <g class="base-timer__circle">
           <circle class="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle>
@@ -90,19 +19,11 @@
       </svg>
       <span class="base-timer__label">{{ formattedTimeLeft }}</span>
     </div>
-              Temporizador
-            </v-sheet>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-main>
-  </v-app>
-</template>
-
-<script>
-import BaseTimer from './BaseTimer.vue';
-
-const FULL_DASH_ARRAY = 283;
+</div>
+  </template>
+  
+  <script>
+  const FULL_DASH_ARRAY = 283;
   const WARNING_THRESHOLD = 10;
   const ALERT_THRESHOLD = 5;
   
@@ -120,29 +41,16 @@ const FULL_DASH_ARRAY = 283;
     }
   };
   
-  const TIME_LIMIT = 20;
+  const TIME_LIMIT = 200;
   
-
   export default {
-    data: () => (
-      {
-        return:{
-          
-    timePassed: 0,
+    data() {
+      return {
+        timePassed: 0,
         timerInterval: null
+      };
+    },
   
-        },
-      links: [
-        'Evaluación',
-        'Ayuda general',
-        'Perfil',
-        'Updates',
-        
-      ],
-    }),
-    BaseTimer
-
-    ,
     computed: {
       circleDasharray() {
         return `${(this.timeFraction * FULL_DASH_ARRAY).toFixed(0)} 283`;
@@ -203,13 +111,10 @@ const FULL_DASH_ARRAY = 283;
         this.timerInterval = setInterval(() => (this.timePassed += 1), 1000);
       }
     }
-  }
+  };
+  </script>
   
-  
-  
-</script>
-
-<style scoped lang="scss">
+  <style scoped lang="scss">
 
   .content{
     position: static;
